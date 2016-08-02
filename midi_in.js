@@ -24,8 +24,9 @@ module.exports = function(RED) {
 		this.addListener=function(port,listener){
 			if (typeof(openPorts[port])=="undefined"){
 				var input = new midi.input();
-				console.log("Open port "+parseInt(port,10));
-				console.log("Port count:"+input.getPortCount());
+				console.log("Open input port "+parseInt(port,10));
+            console.log("   port name = "+ input.getPortName(parseInt(port,10)));
+				console.log("Midi-in Port count:"+input.getPortCount());
 				input.getPortName(0);
 				listeners[port]=new Array();
 				openPorts[port]={
@@ -61,7 +62,7 @@ module.exports = function(RED) {
 		
 	})();
 
-    function MidiNode(n) {
+    function MidiInNode(n) {
         RED.nodes.createNode(this,n);
 		var that=this;
         this.name = n.name || "";
@@ -84,6 +85,6 @@ module.exports = function(RED) {
 	
 
     }
-    RED.nodes.registerType("midi",MidiNode);
+    RED.nodes.registerType("midi_in",MidiInNode);
 
 }
